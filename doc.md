@@ -114,3 +114,43 @@ on ajoute un if pour qu'un message apparaisse si il n'y a pas de posts
 On peut faire une requête en cherche une string ```$post =  Post::where('title','=','Ullam soluta ut error a sed accusantium a.')->get();```
 (erreur collection instance = pas récupéré le bon item dans le get)
 **13/01/2022**
+Erreur rencontrée :
+```
+Migration table created successfully.
+Migrating: 2014_10_12_000000_create_users_table
+
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42000]: Syntax error or access violation: 1071 La clé est trop longue. Longueur maximale: 1000 (SQL: alter table `users` add unique `users_email_unique`(`email`))
+
+  at C:\Users\Bqker\Documents\laravel\vendor\laravel\framework\src\Illuminate\Database\Connection.php:705
+    701▕         // If an exception occurs when attempting to run a query, we'll format the error
+    702▕         // message to include the bindings with SQL, which will make this exception a
+    703▕         // lot more helpful to the developer instead of just the database's errors.
+  ➜ 705▕             throw new QueryException(
+    707▕             );
+    708▕         }
+    709▕     }
+
+  1   C:\Users\Bqker\Documents\laravel\vendor\laravel\framework\src\Illuminate\Database\Connection.php:494
+      PDOException::("SQLSTATE[42000]: Syntax error or access violation: 1071 La clé est trop longue. Longueur maximale: 1000")
+
+  2   C:\Users\Bqker\Documents\laravel\vendor\laravel\framework\src\Illuminate\Database\Connection.php:494
+      PDOStatement::execute()
+```
+Solution :
+Modifier 
+```php
+use Illuminate\Support\Facades\Schema;
+function boot()
+{
+    Schema::defaultStringLength(191); //NEW: Increase StringLength
+}
+```
+Dans ```App/providers/AppServiceProvider.php```
+Puis relancer une migration
+## Relation One to Many
+Plusieurs commentaires pour un post
+
+## Relation One to One
+Une image pour un post

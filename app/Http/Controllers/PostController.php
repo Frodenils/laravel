@@ -15,8 +15,7 @@ class PostController extends Controller
 
     public function show($id)
     {
-        //$post = Post::findOrFail($id);
-        $post =  Post::where('title','Ullam soluta ut error a sed accusantium a.')->firstOrFail();
+        $post = Post::findOrFail($id);
 
         return view('article',[
             'post' => $post
@@ -29,13 +28,14 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->save();
-        // Post::create(
-
-        // );
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->content = $request->content;
+        // $post->save();
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
         dd('post créé');
     }
     public function contact(){

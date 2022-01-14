@@ -19,13 +19,13 @@ Route::get('/posts/create', [PostController::class, 'create'])->name('posts.crea
 Route::post('/posts/create', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/contact', [PostController::class, 'contact'])->name('contact');
-
 // Route::get('/posts', function () {
 //     return response()->json([
 //         'title'=> 'mon super titre',
 //         'description' => 'ma super description' 
 //     ]);
 // });
+
 
 // Route::get('/articles', function () {
 //     return view('articles');
